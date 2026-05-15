@@ -15,7 +15,6 @@ The workspace is structured into two main components, fully containerized for se
 ### 2. TransactionSimulatorReact (Frontend)
 * **Framework:** Built with **React 18**, **TypeScript**, and **Vite**.
 * **Styling:** Responsive UI designed with **Tailwind CSS**.
-* **Localization:** Fully supports **Multi-language (English/Hebrew)** with RTL (Right-to-Left) support.
 * **Dashboard:** Provides real-time metrics including transaction counts, approval rates, and status tracking.
 
 ---
