@@ -34,8 +34,7 @@ Depending on your development environment, use one of the following sets of comm
 #### Option A: Using Terminal / CLI (VS Code / Rider / CMD)
 1. **Create the Migration**:
    ```bash
-   dotnet ef migrations add InitialCreate
-#### 🧪 API Testing with `.http` File
+ dotnet ef database update --project ./TransactionSimulator.Infrastructure/TransactionSimulator.Infrastructure.csproj --startup-project ./TransactionSimulator.Api/TransactionSimulator.Api.csproj#### 🧪 API Testing with `.http` File
 
 The project includes a dedicated `test-api.http` file. This is a modern, lightweight alternative to Postman.
 
