@@ -11,7 +11,6 @@ This is the responsive, high-performance Frontend Client for the **Shva Transact
 - **State Management:** React Component State (`useState`, `useEffect`)
 
 ---
-
 ## ✨ Implemented Client Features
 
 - **Secure Session Management:** Automated application guarding (`AuthPage.tsx`). Restricts full dashboard access until a valid session is verified.
