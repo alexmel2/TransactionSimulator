@@ -1,7 +1,6 @@
 ﻿# 🚀 Shva Global Transaction Simulator (Backend)
 
 A professional .NET 8 Web API built to simulate and validate global financial transactions. This system determines whether a transaction should be "Approved" or "Rejected" by calculating business hours across different global Time Zones.
-
 ---
 
 ## 🏗️ System Architecture
