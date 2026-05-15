@@ -1,0 +1,90 @@
+﻿### Configuration Variables
+@hostname = localhost
+@port = 7171
+@baseUrl = https://{{hostname}}:{{port}}/api
+@authToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhbGV4X21lbG5payIsImp0aSI6ImNlYjEzNzkxLWYxYzAtNDMwNC05ZWExLThhYzJmZTUzZGFmOCIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWVpZGVudGlmaWVyIjoiNDhkYjk5MWQtOTFkOC00ZWVhLTlkMWYtMWYyYzBkMTMxOGMzIiwiZXhwIjoxNzc4ODQ2MjMxLCJpc3MiOiJTaHZhU2ltdWxhdG9yIiwiYXVkIjoiU2h2YVNpbXVsYXRvclVzZXJzIn0.i_368Fw5waOqNBmEe1oLR18S-3JzmXas0oRuboW5tXs
+### ----------------------------------------------------------
+### 1. AUTHENTICATION (Run this first!)
+### ----------------------------------------------------------
+
+
+# @name login
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "username": "alex_melnik",
+  "password": "Password123!"
+}
+
+### Capture the token from the response body
+@authToken = {{login.response.body.token}}
+
+### ----------------------------------------------------------
+### 2. REGIONS
+### ----------------------------------------------------------
+
+### Get All Supported Regions
+# Description: Fetch countries and their time zones.
+# Requires valid JWT token.
+GET {{baseUrl}}/Transactions/regions
+Authorization: Bearer {{authToken}}
+Accept: application/json
+
+### ----------------------------------------------------------
+### 3. TRANSACTION HISTORY
+### ----------------------------------------------------------
+
+### Get Approved Transactions History
+# Description: Fetch transaction list with pagination.
+GET {{baseUrl}}/transactions/GetApprovedTransactions?page=1&pageSize=10
+Authorization: Bearer {{authToken}}
+Accept: application/json
+
+### ----------------------------------------------------------
+### 4. TRANSACTION SIMULATION
+### ----------------------------------------------------------
+
+### Create New Transaction (Expected: Approved)
+# Description: Testing a transaction during business hours (12:00 PM).
+POST {{baseUrl}}/transactions/CreateTransaction
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+    "transactionId": "{{$guid}}",
+    "regionId": 1,
+    "submittedTimeUtc": "2026-05-14T12:00:00Z"
+}
+
+###
+
+### Create New Transaction (Expected: Rejected)
+# Description: Testing a transaction at late night (23:30 PM).
+POST {{baseUrl}}/transactions/CreateTransaction
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+    "transactionId": "{{$guid}}",
+    "regionId": 1,
+    "submittedTimeUtc": "2026-05-14T23:30:00Z"
+}
+
+### ----------------------------------------------------------
+### 5. ERROR HANDLING TESTS
+### ----------------------------------------------------------
+
+### Invalid Data Test (Empty Body)
+# Description: Testing API validation logic for 400 Bad Request.
+POST {{baseUrl}}/transactions/CreateTransaction
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+}
+
+### Unauthorized Access Test
+# Description: Testing access WITHOUT the Bearer token (Should return 401).
+GET {{baseUrl}}/transactions/regions
+Accept: application/json
