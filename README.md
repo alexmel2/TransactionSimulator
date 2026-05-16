@@ -33,8 +33,8 @@ The entire application—including the API, Frontend, and Database—is fully co
    git checkout feature/add-docker-support
 2. **Build and Start the application:**
    ```bash
-   docker-compose up --build
-   ---
+   docker-compose up --build -d
+   
 
 ## 📺 How it Works (Video Demo)
 
