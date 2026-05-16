@@ -19,3 +19,6 @@ The workspace is structured into two main components, fully containerized for se
 ---
 
 
+## 📺 How it Works (Video Demo)
+See the app in action! Click the link below to watch a full video walkthrough of how the application works:
+👉 **[Watch the Loom Video Demo](https://www.loom.com/share/ce67c4e8274641459bce59082e75c011)**
