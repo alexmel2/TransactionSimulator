@@ -17,7 +17,18 @@ The workspace is structured into two main components, fully containerized for se
 * **Styling:** Responsive UI designed with **Tailwind CSS**.
 * **Dashboard:** Provides real-time metrics including transaction counts, approval rates, and status tracking.
 ---
+## 🐳 Docker Deployment (Recommended)
 
+The entire application—including the API, Frontend, and Database—is fully containerized. You can spin up the whole environment with a single command without needing to install .NET, Node.js, or SQL Server locally.
+
+### Prerequisites
+* Make sure [Docker Desktop](https://www.docker.com/products/docker-desktop/) is installed and running.
+
+### 🚀 How to Run (פקודות הרצה)
+
+1. **Switch to the Docker branch:**
+   ```bash
+   git checkout feature/add-docker-support
 
 ## 📺 How it Works (Video Demo)
 See the app in action! Click the link below to watch a full video walkthrough of how the application works:
