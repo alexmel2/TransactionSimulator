@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using FluentValidation.AspNetCore;
-
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 using System.Text;
 using TransactionSimulator.Api.Validators;
@@ -55,11 +55,10 @@ try
     // --- 5. Middleware Pipeline ---
     app.UseCors(appSettings?.CorsConfig?.PolicyName);
 
-    if (app.Environment.IsDevelopment())
-    {
+  
         app.UseSwagger();
         app.UseSwaggerUI();
-    }
+   
 
     app.UseHttpsRedirection();
 
@@ -67,7 +66,23 @@ try
     app.UseAuthorization();  // Permissions
 
     app.MapControllers();
+    using (var scope = app.Services.CreateScope())
+    {
+        var services = scope.ServiceProvider;
+        try
+        {
+            // החלף את ApplicationDbContext בשם ה-DbContext האמיתי שלך
+            var context = services.GetRequiredService<AppDbContext>();
 
+            // פקודה זו בודקת ומריצה את כל ה-Migrations שחסרות בבסיס הנתונים
+            context.Database.Migrate();
+            Console.WriteLine("הטבלאות נוצרו בהצלחה בדוקר!");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"שגיאה ביצירת הטבלאות: {ex.Message}");
+        }
+    }
     app.Run();
 }
 catch (Exception ex)

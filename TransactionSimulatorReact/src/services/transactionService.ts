@@ -1,10 +1,8 @@
 import axios, { AxiosInstance } from 'axios';
 import { Transaction, Region } from '../models/transaction.model';
-
-const API_BASE_URL = 'https://localhost:7171/api'; 
-
+import config from '../config';
 const apiClient: AxiosInstance = axios.create({
-    baseURL: API_BASE_URL,
+    baseURL: config.apiBaseUrl,
     headers: {
         'Content-Type': 'application/json'
     }

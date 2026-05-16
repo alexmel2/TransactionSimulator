@@ -1,4 +1,6 @@
-const BASE_URL = 'https://localhost:7171/api/Auth';
+import config from '../config';
+
+const BASE_URL = `${config.apiBaseUrl}Auth`;
 
 export const authService = {
     // 1. התחברות למערכת (Login)

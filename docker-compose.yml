@@ -1,0 +1,35 @@
+services:
+  # בסיס הנתונים - SQL Server
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sql_server_db
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=YourStrong@Pass123
+    ports:
+      - "1433:1433"
+
+  # שרת ה-Backend (API)
+  server:
+    build:
+      context: .
+      dockerfile: ./TransactionSimulatorAPi/TransactionSimulator.Api/Dockerfile
+    container_name: backend_api
+    depends_on:
+      - db
+    environment:
+      # כאן אנחנו דורסים את ההגדרה מהקוד ומחליפים את localhost ב-db!
+      - ConnectionStrings__DefaultConnection=Server=db,1433;Database=ShvaTransactionDb;User Id=sa;Password=YourStrong@Pass123;TrustServerCertificate=True;MultipleActiveResultSets=true;
+    ports:
+      - "7171:8080"
+
+  # אפליקציית ה-Frontend (React/Vite)
+  client:
+    build: 
+      context: .
+      dockerfile: ./TransactionSimulatorReact/Dockerfile
+    container_name: frontend_react
+    ports:
+      - "5173:80"
+    depends_on:
+      - server

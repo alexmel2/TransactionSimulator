@@ -1,5 +1,5 @@
 const config = {
-    apiBaseUrl: 'https://localhost:7171/api/', 
+    apiBaseUrl: 'http://localhost:7171/api/', 
     regionsCacheKey: 'shva_regions'
 };
 
