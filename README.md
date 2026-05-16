@@ -34,3 +34,10 @@ The entire application—including the API, Frontend, and Database—is fully co
 2. **Build and Start the application:**
    ```bash
    docker-compose up --build
+   ---
+
+## 📺 How it Works (Video Demo)
+
+See the app in action! Click the link below to watch a full video walkthrough of how the application works:
+
+👉 **[Watch the Loom Video Demo](https://www.loom.com/share/ce67c4e8274641459bce59082e75c011)**
